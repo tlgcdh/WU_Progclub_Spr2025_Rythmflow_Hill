@@ -3,8 +3,8 @@
  * Modified for the specific purpose of the rythmflow.
  * and made a little more clear on what the variables are doing.
  */
+package classes;
 import java.io.*;
-
 public class FastReader
 {
     private final int BUFFER_SIZE = 1 << 16; //The size of the buffer
@@ -14,7 +14,8 @@ public class FastReader
     
     
     public FastReader(String filename) throws FileNotFoundException{
-        din = new FileInputStream(filename);
+        ClassLoader cl = getClass().getClassLoader();
+        din = new FileInputStream(new File(cl.getResource("."+filename).getFile()));
         buffer = new byte[BUFFER_SIZE];
         bufferPointer = 0;
         bytesRead = 0;

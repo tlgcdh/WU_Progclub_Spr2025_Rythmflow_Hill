@@ -7,24 +7,24 @@ import classes.*;
 public class Rhythmflow
 {
     public static void main(String[] args)
-    throws FileNotFoundException
+    throws FileNotFoundException, IOException
     {
         long startTime = System.nanoTime();
-        System.out.println(ScoreResolve("Inputs/1.in"));
-        System.out.println(ScoreResolve("Inputs/2.in"));
-        System.out.println(ScoreResolve("Inputs/3.in"));
-        System.out.println(ScoreResolve("Inputs/BigData.txt"));
+        System.out.println(ScoreResolve("/Inputs/1.in"));
+        System.out.println(ScoreResolve("/Inputs/2.in"));
+        System.out.println(ScoreResolve("/Inputs/3.in"));
+        System.out.println(ScoreResolve("/Inputs/BigData.txt"));
         long endTime = System.nanoTime();
         double duration = (endTime - startTime)/1000;
         System.out.println("Operation took:" + duration+" microseconds");
     }
     
     public static int ScoreResolve(String FileName)
-    throws FileNotFoundException
+    throws IOException
     {
         //Load file(s) 
-        Scanner input = new Scanner (new File(FileName));
-        //FileReader input = new FileReader(FileName);
+        //Scanner input = new Scanner (new File(FileName));
+        FastReader input = new FastReader(FileName);
         //Try different method for reading.
         
         
