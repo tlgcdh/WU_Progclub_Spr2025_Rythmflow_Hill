@@ -1,39 +1,36 @@
-/* Author: Cody D. Hill
- * Rythm Flow
- * Quick Time Event Resolution
- * 
- */
-import java.util.Scanner;
-import java.io.*;
-//for testing
-import java.util.Arrays;
+// Author: Cody D. Hill
 
-public class QTE_Resolve
+import java.io.*;
+import java.util.Scanner;
+import classes.*;
+
+public class Rhythmflow
 {
     public static void main(String[] args)
-    throws IOException
+    throws FileNotFoundException
     {
         long startTime = System.nanoTime();
-        System.out.println(ScoreResolve("1.in"));
-        System.out.println(ScoreResolve("2.in"));
-        System.out.println(ScoreResolve("3.in"));
-        System.out.println(ScoreResolve("BigData.txt"));
+        System.out.println(ScoreResolve("Inputs/1.in"));
+        System.out.println(ScoreResolve("Inputs/2.in"));
+        System.out.println(ScoreResolve("Inputs/3.in"));
+        System.out.println(ScoreResolve("Inputs/BigData.txt"));
         long endTime = System.nanoTime();
         double duration = (endTime - startTime)/1000;
         System.out.println("Operation took:" + duration+" microseconds");
     }
     
     public static int ScoreResolve(String FileName)
-    throws IOException
+    throws FileNotFoundException
     {
         //Load file(s) 
-        //Scanner input = new Scanner (new File(FileName));
-        FileReader input = new FileReader(FileName);
+        Scanner input = new Scanner (new File(FileName));
+        //FileReader input = new FileReader(FileName);
         //Try different method for reading.
         
         
         //Capture press count
         int n = input.nextInt();
+        
         int m = input.nextInt();
         
         int[] goal_times = new int[n];
@@ -45,7 +42,7 @@ public class QTE_Resolve
             else user_times[line-n][0] = input.nextInt();
         }
         
-
+        
         //Map Closest Goals
         for(int uIndex = 0; uIndex < m; uIndex++){
             for (int gIndex = 0; gIndex < n; gIndex++){
@@ -78,49 +75,5 @@ public class QTE_Resolve
         }
         
         return score;
-    }
-    
-    //Fast File Reader, working on understanding this.
-    static class FileReader{
-        private final int BUFFER_SIZE = 1 << 16; //The size of the buffer
-        private FileInputStream din; //File stream for input.
-        private byte[] buffer; //An array to store bytes in
-        private int bufferPointer, bytesRead; 
-        
-        
-        public FileReader(String filename) throws FileNotFoundException{
-            din = new FileInputStream(filename);
-            buffer = new byte[BUFFER_SIZE];
-            bufferPointer = 0;
-            bytesRead = 0;
-        }
-        
-        private void fillBuffer() throws IOException{
-            bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE);
-            if(bytesRead == -1) buffer[0] = -1;
-        }
-        
-        private byte read() throws IOException{
-            if(bufferPointer == bytesRead) fillBuffer();
-            return buffer[bufferPointer++];
-        }
-        //Next Int parser
-        public int nextInt() throws IOException{
-            int outInt = 0;
-            byte cha = read();
-            while(cha <= ' '){
-                cha = read();
-            }
-            
-            boolean neg = (cha == '-');
-            if(neg) cha = read();
-            do{
-                outInt = outInt * 10 + cha - '0';
-            } while ((cha = read()) >= '0' && cha <= '9');
-            
-            return neg ? -outInt : outInt;
-        }
-        
-        
     }
 }
