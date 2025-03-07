@@ -28,7 +28,6 @@ public class rhythmflow
         }
 
         int[][] scoreCalcs = new int[n+1][m+1];
-        int aOff = 0;
         for(int eIndex = 1; eIndex < n+1; eIndex++){
             int mod = 0;
             for(int aIndex = 1; aIndex < m+1; aIndex++){
